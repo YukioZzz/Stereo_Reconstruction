@@ -50,8 +50,8 @@ int Rectify_KITTI(Mat R23, Mat t23, Mat left_original, Mat right_original, Mat& 
 
     // cv::Mat rectified_left;
     // cv::Mat rectified_right;
-    cv::remap(left_original, rectified_left, rmap[0][0], rmap[0][1], CV_INTER_LINEAR);
-    cv::remap(right_original, rectified_right, rmap[1][0], rmap[1][1], CV_INTER_LINEAR);
+    cv::remap(left_original, rectified_left, rmap[0][0], rmap[0][1], INTER_LINEAR);
+    cv::remap(right_original, rectified_right, rmap[1][0], rmap[1][1], INTER_LINEAR);
 
     cv::imshow("left_rectified", rectified_left);
     cv::imshow("right_rectified", rectified_right);

@@ -220,7 +220,7 @@ int main( int argc, char** argv ){
             // Add the nodes of feature points
             for ( size_t i=0; i<pts1.size(); i++ )
             {
-                g2o::VertexSBAPointXYZ* v = new g2o::VertexSBAPointXYZ();
+                g2o::VertexPointXYZ* v = new g2o::VertexPointXYZ();
                 v->setId( 2 + i );
                 // here we just set the initial depth to 10 m
                 double z = 10.0;
@@ -247,7 +247,7 @@ int main( int argc, char** argv ){
             for ( size_t i=0; i<pts1.size(); i++ )
             {
                 g2o::EdgeProjectXYZ2UV*  edge = new g2o::EdgeProjectXYZ2UV();
-                edge->setVertex( 0, dynamic_cast<g2o::VertexSBAPointXYZ*>   (optimizer.vertex(i+2)) );
+                edge->setVertex( 0, dynamic_cast<g2o::VertexPointXYZ*>   (optimizer.vertex(i+2)) );
                 edge->setVertex( 1, dynamic_cast<g2o::VertexSE3Expmap*>     (optimizer.vertex(0)) );
                 edge->setMeasurement( Eigen::Vector2d(pts1[i].x, pts1[i].y ) );
                 edge->setInformation( Eigen::Matrix2d::Identity() );
@@ -261,7 +261,7 @@ int main( int argc, char** argv ){
             for ( size_t i=0; i<pts2.size(); i++ )
             {
                 g2o::EdgeProjectXYZ2UV*  edge = new g2o::EdgeProjectXYZ2UV();
-                edge->setVertex( 0, dynamic_cast<g2o::VertexSBAPointXYZ*>   (optimizer.vertex(i+2)) );
+                edge->setVertex( 0, dynamic_cast<g2o::VertexPointXYZ*>   (optimizer.vertex(i+2)) );
                 edge->setVertex( 1, dynamic_cast<g2o::VertexSE3Expmap*>     (optimizer.vertex(1)) );
                 edge->setMeasurement( Eigen::Vector2d(pts2[i].x, pts2[i].y ) );
                 edge->setInformation( Eigen::Matrix2d::Identity() );
@@ -295,7 +295,7 @@ int main( int argc, char** argv ){
             // the position of all feature points
             for ( size_t i=0; i<pts1.size(); i++ )
             {
-                g2o::VertexSBAPointXYZ* v = dynamic_cast<g2o::VertexSBAPointXYZ*> (optimizer.vertex(i+2));
+                g2o::VertexPointXYZ* v = dynamic_cast<g2o::VertexPointXYZ*> (optimizer.vertex(i+2));
                 // cout<<"vertex id "<<i+2<<", pos = ";
                 Eigen::Vector3d pos = v->estimate();
                 // cout<<pos(0)<<","<<pos(1)<<","<<pos(2)<<endl;

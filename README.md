@@ -9,6 +9,16 @@
 Stereo reconstruction is a very active research field in computer vision, which has a wide range of applications in architecture capturing and autonomous driving. In this project, we apply different stereo matching methods to reconstruct 3D scenes and compare their performance. Based on key-point detectors and eight-point algorithm, we recover the camera's extrinsic and rectify the images from left and right camera for the next step. Then we apply three dense matching methods to generate the disparity map respectively and further reconstruct the 3D scene. 
 We evaluate the impact of different detectors and bundle adjustment on the accuracy of the estimated transformation. The experiment shows that SIFT performs better than ORB, and the accuracy of the estimated transform is also improved after using bundle adjustment. For dense matching, with PSMNet, which is the SOTA in disparity prediction, we can get much higher precision than classic methods block matching and semi-global matching.
 
+## Test and Run
+run the script `autorun.sh` directly
+```
+chmod +x autorun.sh
+./autorun.sh
+```
+In the script, it will compile the docker image first, and then enable GUI with `xhost +local:docker`, and also run the container with the specific params.
+
+When you are inside the container, the project will be already compiled under the directory `project/build`.
+
 ## Pipeline
 The images we use in this project are the raw data from KITTI dataset, which are distorted and unrectified. First, we use SIFT and ORB detector to find the matching points in the left and right images. Then we use eight point algorithm to figure out the rotation and translation from these matching points. Here, we also try using bundle adjustment to improve the accuracy of rotation and translation. After we get the extrinsic, we rectify the left and right images for the dense matching. In our project, we use the classic block matching and semi-global matching to compute the disparity map. Furthermore, we use PSMNet to see how is the performance of deep learning in this field. Finally, we reconstruct the 3d scenario with this disparity map. 
 In our project, we evaluate two things. One is the estimated transform, and the other is the disparity map. 

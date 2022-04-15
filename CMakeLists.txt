@@ -2,21 +2,23 @@ cmake_minimum_required( VERSION 2.8 )
 project(reconstruction)
 
 set( CMAKE_BUILD_TYPE "Release" )
-set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
+set( CMAKE_CXX_FLAGS "-std=c++14 -O3" )
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 
-# find_package( OpenCV 3.1 REQUIRED )
+# find_package( OpenCV REQUIRED )
 find_Package(G2O REQUIRED)
 find_Package(Eigen3 REQUIRED)
 # find_Package(Ceres REQUIRED)
 # find_Package(Sophus REQUIRED)
 # find_Package(CSparse REQUIRED)
-find_package( OpenCV 3.2 REQUIRED )
+find_package( OpenCV REQUIRED )
+find_package( Boost REQUIRED )
 # find_package( PCL REQUIRED )
+include_directories("/usr/include/suitesparse")
 
-SET(G2O_LIBS "/usr/local/lib/libg2o_csparse_extension.so" ${G2O_STUFF_LIBRARY} ${G2O_CORE_LIBRARY}  "/usr/local/lib/libg2o_types_sba.so" cxsparse)
+SET(G2O_LIBS g2o_cli g2o_solver_slam2d_linear g2o_types_icp g2o_types_slam2d g2o_core g2o_interface g2o_solver_csparse g2o_solver_structure_only g2o_types_sba g2o_types_slam3d g2o_csparse_extension g2o_solver_dense g2o_stuff g2o_types_sclam2d g2o_parser g2o_solver_pcg g2o_types_data g2o_types_sim3 cxsparse )
 
 message("CSPARSE_INCLUDE_DIR: ${CSPARSE_INCLUDE_DIR}")
 message("G2O_CSPARSE_EXTENSION_LIBRARY: ${G2O_CSPARSE_EXTENSION_LIBRARY}")
